@@ -4,7 +4,9 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    vereson: '1.0',
+    openId:null,
+    users: [],
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -15,8 +17,20 @@ Page({
       url: '../logs/logs'
     })
   },
+  bindRegister: function () {
+    wx.navigateTo({
+      url: '../logs/logs'
+    })
+  },
   onLoad: function () {
+  
+    wx.cloud.init({
+      traceUser:true
+    })
+    console.log("进来了?" + app.globalData.userInfo )
+
     if (app.globalData.userInfo) {
+      console.log("开始了" + app.globalData.userInfo)
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
@@ -29,26 +43,79 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        console.log("进来了吗" + res.userInfo)
+        this.otherOparation(res.userInfo)
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
           app.globalData.userInfo = res.userInfo
+          console.log("res.userInfo"+res)
           this.setData({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
+          console.log("进来了吗" + res.userInfo)
+         
         }
       })
     }
   },
+  otherOparation: function (userInfo){
+    console.log("进来了" +userInfo)
+    if (!userInfo){
+      return;
+    }
+
+    const self = this;
+    //获取openid
+    wx.cloud.callFunction({
+      name: 'test',
+      complete: res => {
+        console.log("拿到openid" +res.result.userInfo.openId)
+        self.setData({
+          openId: res.result.userInfo.openId
+        })
+        this.findByOpenId(res.result.userInfo.openId);
+      }
+    })
+  },
   getUserInfo: function(e) {
-    console.log(e)
+    console.log("开始了获取到了哟" + e.detail.userInfo)
+
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+
+    this.otherOparation(e.detail.userInfo)
+  },
+  findByOpenId: function (openId){
+    console.log("用拿到的openid查数据哟" + openId)
+    const db = wx.cloud.database()
+  
+  
+    db.collection('user').where({ openId: openId })
+      .get({
+        success: function (res) {
+          // res.data 是包含以上定义的两条记录的数组
+          console.log("res.data.length查数据哟" + res.data.length)
+          if (res.data.length==0){
+            wx.navigateTo({
+              url: '../register/register?openId=' + openId,  //跳转页面的路径，可带参数 ？隔开，不同参数用 & 分隔；相对路径，不需要.wxml后缀
+            
+            })
+         }else{
+            this.setData({
+              user: userData ? userData : null
+            })
+         }
+        }
+      })
+      
+      
+  
   }
 })

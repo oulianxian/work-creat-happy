@@ -8,6 +8,7 @@
     </block>
   </view>
   <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+    <text class="user-motto">乐商加班助手出版{{vereson}}</text>
+    <!-- <text class="user-motto"  wx:for="{{users}}" wx:key="{{users._id}}">{{item.user}}</text> -->
   </view>
 </view>
