@@ -1,14 +1,51 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+ 
+<view class="home-container">
+  <view class='m-top'>
+    <view class='top-lt'>
+  <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+     <block wx:else>
+    
+      <view class='name'>{{userInfo.nickName}}</view>
+      <view class='lt-info'>
+        <!-- <image src="{{userInfo.avatarUrl}}"  mode="scaleToFill" class="icon-address"/> -->
+        <text class='lt-label'>实施部</text>
+        <!-- <image src="../../../media/images/job-number.png" mode="scaleToFill" class="job-number"/>
+        <text class='lt-label'>{{assistantInfo.employeeCode}}</text> -->
+      </view>
+        </block>
+    </view>
+    <navigator class='item phone-set'  url='../../../../user/setting/setting?avatarUrl={{(!hasUserInfo && canIUse)?"":userInfo.avatarUrl}}'>
+        <view class='top-rt'>
+        <image src="{{assistantInfo.iconFileId ? assistantInfo.iconFileId:userInfo.avatarUrl}}" mode="scaleToFill" class="head-image"/>
+        
+        </view>
+    </navigator>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">乐商加班助手出版{{vereson}}</text>
-    <!-- <text class="user-motto"  wx:for="{{users}}" wx:key="{{users._id}}">{{item.user}}</text> -->
-  </view>
+   <scorll-view class='containers' scorll-y="true">
+   
+   
+   <view class="commitv" catchtap='gotoMustLearn'>
+        <view class="commitvview" style="background:#fff;margin-left:32rpx;">
+		   <text class="commtext">我要加班</text>
+	
+		</view>
+		 <view class="commitvview" style="background:#fff;margin-right:32rpx;">
+		     <text class="commtext">加班记录</text>
+		      
+		 </view>
+   </view>
+
+   <view class="commitv">
+        <view class="commitvview" style="background:#fff;margin-left:32rpx;">
+		   <text class="commtext">今晚谁加班</text>
+ 
+		</view>
+		 <view class="commitvview" style="background:#fff;margin-right:32rpx;">
+		     <text class="commtext">人员列表</text>
+		    
+		 </view>
+   </view>
+   
+</scorll-view>
+ 
 </view>

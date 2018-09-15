@@ -97,7 +97,7 @@ Page({
     const db = wx.cloud.database()
   
   
-    db.collection('user').where({ openId: openId })
+    db.collection('user').where({ _openid:openId})
       .get({
         success: function (res) {
           // res.data 是包含以上定义的两条记录的数组

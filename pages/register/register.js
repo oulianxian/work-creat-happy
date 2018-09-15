@@ -5,6 +5,7 @@ Page({
    */
   data: {
       keyWords:'',//会员搜索关键字
+      team: ''//会员搜索关键字
   },
   onLoad: function (options) {
     console.log("options.openId找到了吗" + options.openId)
@@ -22,7 +23,12 @@ Page({
             keyWords:e.detail.value,
         });
   },
-
+  updateTeamValue: function (e) {
+    let self = this;
+    self.setData({
+      team: e.detail.value,
+    });
+  },
   /**
    * 去往快速快速检测页面
    */
@@ -36,6 +42,7 @@ Page({
         // _id: 'todo-identifiant-aleatoire', // 可选自定义 _id，在此处场景下用数据库自动分配的就可以了
         name: this.data.keyWords,
         openId: this.data.openid,
+        team: this.data.team
       },
       success: function (res) {
         // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
