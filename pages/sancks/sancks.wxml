@@ -1,0 +1,79 @@
+<!--pages/test/healthService/healthService.wxml-->
+<view class='health-container'>
+    <scroll-view class='scroll-container' scroll-y="true">
+        <view class='recent-infos'>
+            <view class='title-view'>
+                <text>最受喜爱前三强</text>
+            </view>
+            <view class='cell-line'/>
+            <view class='infos-view'>
+                <navigator class='seg' url='./healthArchive/healthArchive?state=2'>
+                    <text class='value-title'>木瓜糖</text>
+                    <text class='ill-title'>106赞</text>
+                </navigator>
+                <view class='space-line'/>
+                <navigator class='seg' url='./healthArchive/healthArchive?state=2'>
+                    <text class='value-title'>99赞</text>
+                    <text class='ill-title'>番薯干</text>
+                </navigator>
+                <view class='space-line'/>
+                <navigator class='seg' url='./healthArchive/healthArchive?state=2'>
+                    <text class='value-title'>77赞</text>
+                    <text class='ill-title'>口香糖</text>
+                </navigator>
+            </view>
+        </view>
+        <!-- <view class='recent-infos center-section'>
+            <navigator class='single-line' url='./healthAlert/healthFlles'>
+                <view class='center-item'>
+                    <image class='tip-img' src='../../../media/images/archive.png'/>
+                    <text class='left-txt'>健康档案</text>
+                </view>
+                <view class='center-item'>
+                    <text class='right-txt'>1050人</text>
+                    <image class='arrow' src='../../../media/images/Chevron1.png'/>
+                </view>
+            </navigator>
+            <view class='cell-line'/>
+            <navigator class='single-line' url='./healthArchive/healthArchive'>
+                <view class='center-item'>
+                    <image class='tip-img' src='../../../media/images/alert.png'/>
+                    <text class='left-txt'>健康预警</text>
+                </view>
+                <view class='center-item'>
+                    <image class='arrow' src='../../../media/images/Chevron1.png'/>
+                </view>
+            </navigator>
+        </view> -->
+        <view class='recent-infos center-section'>
+            <view class='bottom-view'  >
+                <text class='bottom-leftTxt'>排名</text>
+                <text class='bottom-rightTxt' catchtap='jumpToAdd' >+登记零食</text>
+            </view>
+            <view class='cell-line'/>
+       <block wx:for="{{snackList}}" wx:key="*this"     >
+                      <navigator class='patient-warp' url="./fastCheck/fastCheck?reportId={{index}}">
+                          <image class='photo' src='{{defaultImg}}'/>
+                          <view class='patient-view'>
+                              <view class='patient-top'>
+                                  <view class='top-content'>
+                                      <text>{{item.snackName}}</text>
+                                      <image class='gender-tip' src="{defaultImg}"/>
+                                  </view>
+                                  <text class='pay-date'>{{item.snackTrait}}</text>
+                              </view>
+
+                              <text class='pay-history'>{{item.snackMoney}}</text>
+                              <!-- <view class='tips-view'>
+                                  <view class='light'><text decode="{{true}}">活跃期</text></view>
+                                  <view class='gray'><text decode="{{true}}">普通会员</text></view>
+                                  <view class='gray'><text decode="{{true}}">微信</text></view>
+                              </view> -->
+                          </view>
+                      </navigator>
+
+                  </block>
+        </view>
+    </scroll-view>
+    
+</view>

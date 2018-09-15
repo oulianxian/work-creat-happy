@@ -1,0 +1,40 @@
+<!--pages/test/healthService/registerVip/registerVip.wxml-->
+<view class='register-container'>
+    <view class='checker-view'>
+         <image class='photo' src='https://lg-8lm3q58g-1255909459.cos.ap-shanghai.myqcloud.com/snack.jpg'/>
+        <view class='checker-info'>
+            <view class='checker-item item-top'>
+                <text class='checker-name'>点我上图</text>
+                <!-- <image class='gender-icon' src='https://lg-8lm3q58g-1255909459.cos.ap-shanghai.myqcloud.com/snack.jpg'/> -->
+            </view>
+            <view class='checker-item item-bottom'>
+                <!-- <image class='vip-icon'/>
+                <text class='vip-type'>高级会员</text> -->
+                <!-- <text class='vip-age'>25岁</text> -->
+            </view>
+        </view>
+    </view>
+
+    <text class='bind-title'>新增/修改</text>
+
+    <view class='form-view'>
+        <view class='form-name'>
+            <view class='name-view'><text>零食：</text></view>
+            <input class='name-input' placeholder='请输入零食大名' id="snackName" maxlength="10" bindinput='updateSnackData' placeholder-class='place-input'/>
+        </view>
+        <view class='cell-line'/>
+        <view class='form-name'>
+            <view class='name-view'><text>口味</text></view>
+            <input class='phone-input' placeholder='偏甜/偏辣/偏受喜爱'  id="snackTrait"   maxlength="3"   maxlength="10" bindinput='updateSnackData'  placeholder-class='place-input'/>
+        </view>
+        <view class='form-name'>
+            <view class='name-view'><text>价位</text></view>
+            <input class='phone-input' placeholder='多少文(元)' id="snackMoney" bindinput='updateSnackData'   maxlength="4" placeholder-class='place-input'/>
+        </view>
+        <view class='cell-line'/>
+          <view class='search-btn' bindtap='submitSnack'>
+            <text>确认</text>
+          </view>
+
+    </view>
+</view>

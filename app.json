@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/register/register",
-    "pages/logs/logs"
+    "pages/add/add",
+    "pages/sancks/sancks"
   ],
   "window":{
     "backgroundTextStyle":"light",

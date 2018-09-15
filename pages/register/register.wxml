@@ -6,10 +6,10 @@
         <view class='cell-line'/>
 
         <view class='input-warp'>
-            <input placeholder='小哥哥/小姐姐' name='keyWords' bindblur='updateValue' maxlength='18' placeholder-style='text-align:center;font-family:PingFangSC-Regular;font-size: 30rpx;'/>
+            <input placeholder='小哥哥/小姐姐' name='keyWords' bindinput='updateValue' maxlength='18' placeholder-style='text-align:center;font-family:PingFangSC-Regular;font-size: 30rpx;'/>
         </view>
         <view class='input-warp'>
-            <input placeholder='项目组' name='team' bindblur='updateTeamValue' maxlength='18' placeholder-style='text-align:center;font-family:PingFangSC-Regular;font-size: 30rpx;'/>
+            <input placeholder='项目组' name='team' bindinput='updateTeamValue' maxlength='18' placeholder-style='text-align:center;font-family:PingFangSC-Regular;font-size: 30rpx;'/>
         </view>
         <view class='search-btn' bindtap='gotoFastCheck'>
             <text>登记</text>
