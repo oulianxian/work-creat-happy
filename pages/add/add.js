@@ -1,4 +1,4 @@
-// pages/test/healthService/registerVip/add.js
+const util = require("../../utils/util.js");
 Page({
 
     /**
@@ -11,38 +11,38 @@ Page({
             snackMoney: ""
         }
     },
+
+    /**
+     * 更新输入值
+     */
     updateSnackData: function (e) {
-        let snackSingleInput = "this.data.snackData" + e.detail.name;
+        let snackSingleInput = "snackData." + e.currentTarget.id;
         this.setData({
             [snackSingleInput]: e.detail.value,
         });
         console.log("输入触发" + e.detail.value);
     },
     /**
-     * 去往快速快速检测页面
+     * 提交
+     * @returns {boolean}
      */
     submitSnack: function () {
         let data = {
             snackName: this.data.snackData.snackName,
             snackTrait: this.data.snackData.snackTrait,
             snackMoney: this.data.snackData.snackMoney,
-            crateTime: new Date()
+            crateTime: new Date(),
+            likeQuality:0
         };
-       if( !this.checkData(data)){
-           return false;
-       }
+        if( !this.checkData(data)){
+            return false;
+        }
         const db = wx.cloud.database();
         db.collection('snack').add({
             // data 字段表示需新增的 JSON 数据
             data,
             success: function (res) {
-                // res 是一个对象，其中有 _id 字段标记刚创建的记录的 id
-                console.log(res);
-                wx.navigateTo({
-                    url: '../index/index',  //跳转页面的路径，可带参数 ？隔开，不同参数用 & 分隔；相对路径，不需要.wxml后缀
-                    success: function () {
-                    }
-                })
+                util.showModal("新增成功","是否还有吩咐?",()=>{util.redirectTo("../add/add")},()=>{util.redirectTo("../sancks/sancks")});
             }
         })
     },
@@ -50,9 +50,25 @@ Page({
      * 检查提交数据
      */
     checkData: function (data) {
-        if(!data.snackName||!data.snackTrait||!data.snackMoney){
+        if(!data.snackName){
+            util.showToast("你不告诉我买啥吗");
             return false;
         }
+        if(!data.snackTrait){
+            util.showToast("口味很重要,不要让我猜");
+            return false;
+        }
+        if(!data.snackMoney){
+            util.showToast("没钱还想剁手");
+            return false;
+        }
+        if(!util.validateDouble(data.snackMoney)){
+            util.showToast("请输入正确的金额懂?");
+            return false;
+        }
+        return true;
+
+
     },
     /**
      * 生命周期函数--监听页面加载
